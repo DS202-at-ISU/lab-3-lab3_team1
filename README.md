@@ -26,8 +26,15 @@ Extract from the data below two data sets in long form `deaths` and
 
 ``` r
 library(tidyr)
+```
+
+    ## Warning: package 'tidyr' was built under R version 4.3.3
+
+``` r
 library(dplyr)
 ```
+
+    ## Warning: package 'dplyr' was built under R version 4.3.3
 
     ## 
     ## Attaching package: 'dplyr'
@@ -44,9 +51,19 @@ library(dplyr)
 library(tidyverse)
 ```
 
+    ## Warning: package 'tidyverse' was built under R version 4.3.3
+
+    ## Warning: package 'ggplot2' was built under R version 4.3.3
+
+    ## Warning: package 'readr' was built under R version 4.3.3
+
+    ## Warning: package 'forcats' was built under R version 4.3.3
+
+    ## Warning: package 'lubridate' was built under R version 4.3.3
+
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
-    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.0     ✔ stringr   1.5.1
     ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
     ## ✔ purrr     1.0.2
 
@@ -282,6 +299,39 @@ possible.
 > Quote the statement you are planning to fact-check.
 
 ### Include the code
+
+``` r
+#FiveThirtyEight Statement:
+#"and on 57 occasions the individual made a comeback."
+
+#Code of individuals returned after their first death
+totalreturns <- maxreturns%>% filter(Return == "YES")
+totalreturns %>% count(Time_max, Return) -> rr
+
+
+deathsavg %>% count(Time_max, Died) -> tt
+rr$Time_max
+```
+
+    ## [1] 1 2 5
+
+``` r
+rr$n
+```
+
+    ## [1] 38  7  1
+
+``` r
+rr$Time_max * rr$n
+```
+
+    ## [1] 38 14  5
+
+``` r
+sum(rr$Time_max * rr$n)
+```
+
+    ## [1] 57
 
 Make sure to include the code to derive the (numeric) fact for the
 statement
