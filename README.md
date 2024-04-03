@@ -44,6 +44,8 @@ library(dplyr)
 library(tidyverse)
 ```
 
+    ## Warning: package 'tidyverse' was built under R version 4.3.3
+
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
     ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
@@ -256,6 +258,48 @@ sum(tt$Time_max * tt$n)
 ```
 
     ## [1] 89
+
+``` r
+numdeath <- sum(tt$Time_max * tt$n)
+print(numdeath/173)
+```
+
+    ## [1] 0.5144509
+
+``` r
+jocastadeaths <- deaths %>%
+  filter(Died != "") %>%
+  filter(Name.Alias == "Jocasta") %>%
+  group_by(URL, Died) %>%
+  summarise(
+    Time_max = max(Time, na.rm = TRUE),
+    .groups = "drop"
+  )
+jocastareturns <- returns %>%
+  filter(Return != "") %>%
+  filter(Name.Alias == "Jocasta") %>%
+  group_by(URL, Return) %>%
+  summarise(
+    Time_max = max(Time, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+jocastadeaths %>% count(Time_max, Died)
+```
+
+    ## # A tibble: 1 × 3
+    ##   Time_max Died      n
+    ##      <dbl> <chr> <int>
+    ## 1        5 YES       1
+
+``` r
+jocastareturns %>% count(Time_max, Return)
+```
+
+    ## # A tibble: 1 × 3
+    ##   Time_max Return     n
+    ##      <dbl> <chr>  <int>
+    ## 1        5 YES        1
 
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number

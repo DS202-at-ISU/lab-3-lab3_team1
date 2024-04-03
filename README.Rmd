@@ -128,6 +128,29 @@ tt$Time_max
 tt$n
 tt$Time_max * tt$n
 sum(tt$Time_max * tt$n)
+numdeath <- sum(tt$Time_max * tt$n)
+print(numdeath/173)
+
+
+jocastadeaths <- deaths %>%
+  filter(Died != "") %>%
+  filter(Name.Alias == "Jocasta") %>%
+  group_by(URL, Died) %>%
+  summarise(
+    Time_max = max(Time, na.rm = TRUE),
+    .groups = "drop"
+  )
+jocastareturns <- returns %>%
+  filter(Return != "") %>%
+  filter(Name.Alias == "Jocasta") %>%
+  group_by(URL, Return) %>%
+  summarise(
+    Time_max = max(Time, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+jocastadeaths %>% count(Time_max, Died)
+jocastareturns %>% count(Time_max, Return)
 
 ```
 
