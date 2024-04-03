@@ -304,7 +304,7 @@ possible.
 ### Include the code
 
 ``` r
-#FiveThirtyEight Statement:
+#FiveThirtyEight Statement: Gabriel Wright
 #"and on 57 occasions the individual made a comeback."
 
 #Code of individuals returned after their first death
@@ -335,6 +335,10 @@ sum(rr$Time_max * rr$n)
 ```
 
     ## [1] 57
+
+``` r
+#acccording to our code the analysis is correct that there are 57 total returns
+```
 
 Make sure to include the code to derive the (numeric) fact for the
 statement
