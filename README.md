@@ -26,8 +26,15 @@ Extract from the data below two data sets in long form `deaths` and
 
 ``` r
 library(tidyr)
+```
+
+    ## Warning: package 'tidyr' was built under R version 4.3.3
+
+``` r
 library(dplyr)
 ```
+
+    ## Warning: package 'dplyr' was built under R version 4.3.3
 
     ## 
     ## Attaching package: 'dplyr'
@@ -46,9 +53,17 @@ library(tidyverse)
 
     ## Warning: package 'tidyverse' was built under R version 4.3.3
 
+    ## Warning: package 'ggplot2' was built under R version 4.3.3
+
+    ## Warning: package 'readr' was built under R version 4.3.3
+
+    ## Warning: package 'forcats' was built under R version 4.3.3
+
+    ## Warning: package 'lubridate' was built under R version 4.3.3
+
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
-    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.0     ✔ stringr   1.5.1
     ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
     ## ✔ purrr     1.0.2
 
@@ -153,6 +168,19 @@ maxdeaths %>% count(Time_max, Died)
     ## 4        2 YES      14
     ## 5        3 YES       1
     ## 6        5 YES       1
+
+``` r
+deathsavg <-  maxdeaths %>% filter(Died == "YES")
+deathsavg %>% count(Time_max, Died)
+```
+
+    ## # A tibble: 4 × 3
+    ##   Time_max Died      n
+    ##      <dbl> <chr> <int>
+    ## 1        1 YES      53
+    ## 2        2 YES      14
+    ## 3        3 YES       1
+    ## 4        5 YES       1
 
 ``` r
 returns <- av %>% select(

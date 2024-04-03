@@ -96,6 +96,8 @@ maxdeaths <- deaths %>%
   )
 
 maxdeaths %>% count(Time_max, Died)
+deathsavg <-  maxdeaths %>% filter(Died == "YES")
+deathsavg %>% count(Time_max, Died)
 
 returns <- av %>% select(
   URL,
