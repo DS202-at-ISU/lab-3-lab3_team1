@@ -68,6 +68,12 @@ av <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/av
 ```
 
 ```{r}
+
+library(tidyr)
+library(dplyr)
+library(tidyverse)
+
+
 deaths <- av %>% select(
   URL,
   Name.Alias,
@@ -90,6 +96,29 @@ maxdeaths <- deaths %>%
   )
 
 maxdeaths %>% count(Time_max, Died)
+
+returns <- av %>% select(
+  URL,
+  Name.Alias,
+  starts_with("Return")
+) %>% pivot_longer(
+  cols = Return1:Return5,
+  names_to = "Time",
+  values_to = "Return"
+)
+returns
+returns <- returns %>% mutate(
+  Time = parse_number(Time)
+)
+maxreturns <- returns %>%
+  filter(Return != "") %>%
+  group_by(URL, Return) %>%
+  summarise(
+    Time_max = max(Time, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+maxreturns %>% count(Time_max, Return)
 ```
 
 Get the data into a format where the five columns for Death[1-5] are replaced by two columns: Time, and Death. Time should be a number between 1 and 5 (look into the function `parse_number`); Death is a categorical variables with values "yes", "no" and "". Call the resulting data set `deaths`. 
