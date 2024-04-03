@@ -25,8 +25,45 @@ Submit a link to your repository on Canvas (only one submission per team) to sig
 Extract from the data below two data sets in long form `deaths` and `returns`
 
 ```{r}
+library(tidyr)
+library(dplyr)
+
+# Assuming your dataset is named 'av'
+# Replace 'path_to_data' with the actual path to your data file if it's not loaded in R yet
+
+# Load data
 av <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/avengers/avengers.csv", stringsAsFactors = FALSE)
-head(av)
+  # Replace with your actual data file
+
+
+# Reshape Death columns
+deaths <- av %>%
+  pivot_longer(cols = starts_with("Death"),
+               names_to = c(".value", "Time"),
+               names_pattern = "([A-Za-z]+)([0-9]+)") %>%
+  mutate(Death = ifelse(Death != "", "yes", "no"))  # Mark as "yes" if not empty, otherwise "no"
+
+# Reshape Return columns
+returns <- av %>%
+  pivot_longer(cols = starts_with("Return"),
+               names_to = c(".value", "Time"),
+               names_pattern = "([A-Za-z]+)([0-9]+)") %>%
+  mutate(Return = ifelse(Return != "", "yes", "no"))  # Mark as "yes" if not empty, otherwise "no"
+
+# Calculate average deaths and returns suffered by an Avenger
+average_deaths <- deaths %>%
+  group_by(Name.Alias) %>%
+  summarise(avg_deaths = mean(Death == "yes", na.rm = TRUE))
+
+average_returns <- returns %>%
+  group_by(Name.Alias) %>%
+  summarise(avg_returns = mean(Return == "yes", na.rm = TRUE))
+
+# Output the results
+print("Average deaths:")
+print(average_deaths, n = nrow(average_deaths))
+print("Average returns:")
+print(average_returns, n = nrow(average_returns))
 ```
 
 Get the data into a format where the five columns for Death[1-5] are replaced by two columns: Time, and Death. Time should be a number between 1 and 5 (look into the function `parse_number`); Death is a categorical variables with values "yes", "no" and "". Call the resulting data set `deaths`. 
