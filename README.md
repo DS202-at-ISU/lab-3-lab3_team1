@@ -252,10 +252,11 @@ tt$Time_max * tt$n
     ## [1] 53 28  3  5
 
 ``` r
-sum(tt$Time_max * tt$n)
+numdeath <- sum(tt$Time_max * tt$n)
+print(numdeath/173)
 ```
 
-    ## [1] 89
+    ## [1] 0.5144509
 
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
@@ -267,6 +268,8 @@ Similarly, deal with the returns of characters.
 
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
+
+There is an average of .51 deaths per Avenger.
 
 ## Individually
 
