@@ -26,15 +26,8 @@ Extract from the data below two data sets in long form `deaths` and
 
 ``` r
 library(tidyr)
-```
-
-    ## Warning: package 'tidyr' was built under R version 4.3.3
-
-``` r
 library(dplyr)
 ```
-
-    ## Warning: package 'dplyr' was built under R version 4.3.3
 
     ## 
     ## Attaching package: 'dplyr'
@@ -51,19 +44,9 @@ library(dplyr)
 library(tidyverse)
 ```
 
-    ## Warning: package 'tidyverse' was built under R version 4.3.3
-
-    ## Warning: package 'ggplot2' was built under R version 4.3.3
-
-    ## Warning: package 'readr' was built under R version 4.3.3
-
-    ## Warning: package 'forcats' was built under R version 4.3.3
-
-    ## Warning: package 'lubridate' was built under R version 4.3.3
-
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
-    ## ✔ ggplot2   3.5.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
     ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
     ## ✔ purrr     1.0.2
 
@@ -234,6 +217,45 @@ maxreturns %>% count(Time_max, Return)
     ## 4        2 YES        7
     ## 5        3 NO         1
     ## 6        5 YES        1
+
+``` r
+deathsavg %>% count(Time_max, Died) -> tt
+tt
+```
+
+    ## # A tibble: 4 × 3
+    ##   Time_max Died      n
+    ##      <dbl> <chr> <int>
+    ## 1        1 YES      53
+    ## 2        2 YES      14
+    ## 3        3 YES       1
+    ## 4        5 YES       1
+
+``` r
+# A tibble: 4 × 3
+
+tt$Time_max
+```
+
+    ## [1] 1 2 3 5
+
+``` r
+tt$n
+```
+
+    ## [1] 53 14  1  1
+
+``` r
+tt$Time_max * tt$n
+```
+
+    ## [1] 53 28  3  5
+
+``` r
+sum(tt$Time_max * tt$n)
+```
+
+    ## [1] 89
 
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
