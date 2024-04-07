@@ -26,15 +26,8 @@ Extract from the data below two data sets in long form `deaths` and
 
 ``` r
 library(tidyr)
-```
-
-    ## Warning: package 'tidyr' was built under R version 4.3.3
-
-``` r
 library(dplyr)
 ```
-
-    ## Warning: package 'dplyr' was built under R version 4.3.3
 
     ## 
     ## Attaching package: 'dplyr'
@@ -51,22 +44,9 @@ library(dplyr)
 library(tidyverse)
 ```
 
-    ## Warning: package 'tidyverse' was built under R version 4.3.3
-
-<<<<<<< HEAD
-=======
-    ## Warning: package 'ggplot2' was built under R version 4.3.3
-
-    ## Warning: package 'readr' was built under R version 4.3.3
-
-    ## Warning: package 'forcats' was built under R version 4.3.3
-
-    ## Warning: package 'lubridate' was built under R version 4.3.3
-
->>>>>>> 7c232c4bd77f70a135a40a148870fa6a868cabd8
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
-    ## ✔ ggplot2   3.5.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
     ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
     ## ✔ purrr     1.0.2
 
@@ -272,11 +252,10 @@ tt$Time_max * tt$n
     ## [1] 53 28  3  5
 
 ``` r
-numdeath <- sum(tt$Time_max * tt$n)
-print(numdeath/173)
+sum(tt$Time_max * tt$n)
 ```
 
-    ## [1] 0.5144509
+    ## [1] 89
 
 ``` r
 numdeath <- sum(tt$Time_max * tt$n)
@@ -320,6 +299,13 @@ jocastareturns %>% count(Time_max, Return)
     ##      <dbl> <chr>  <int>
     ## 1        5 YES        1
 
+``` r
+numdeath <- sum(tt$Time_max * tt$n)
+print(numdeath/173)
+```
+
+    ## [1] 0.5144509
+
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
 between 1 and 5 (look into the function `parse_number`); Death is a
@@ -331,7 +317,7 @@ Similarly, deal with the returns of characters.
 Based on these datasets calculate the average number of deaths an
 Avenger suffers.
 
-There is an average of .51 deaths per Avenger.
+**There is an average of .51 deaths per Avenger.**
 
 ## Individually
 
@@ -392,6 +378,93 @@ statement
 
 Include at least one sentence discussing the result of your
 fact-checking endeavor.
+
+Upload your changes to the repository. Discuss and refine answers as a
+team.
+
+## Cassie
+
+For each team member, copy this part of the report.
+
+Each team member picks one of the statements in the FiveThirtyEight
+[analysis](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/)
+and fact checks it based on the data. Use dplyr functionality whenever
+possible.
+
+### FiveThirtyEight Statement
+
+> “There’s a 2-in-3 chance that a member of the Avengers returned from
+> their first stint in the afterlife.”
+
+### Include the code
+
+``` r
+maxreturns %>% count(Time_max, Return) 
+```
+
+    ## # A tibble: 6 × 3
+    ##   Time_max Return     n
+    ##      <dbl> <chr>  <int>
+    ## 1        1 NO        23
+    ## 2        1 YES       38
+    ## 3        2 NO         8
+    ## 4        2 YES        7
+    ## 5        3 NO         1
+    ## 6        5 YES        1
+
+``` r
+maxreturns %>% count(Time_max, Return) -> rr
+
+deathsavg %>% count(Time_max, Died) -> cc
+cc
+```
+
+    ## # A tibble: 4 × 3
+    ##   Time_max Died      n
+    ##      <dbl> <chr> <int>
+    ## 1        1 YES      53
+    ## 2        2 YES      14
+    ## 3        3 YES       1
+    ## 4        5 YES       1
+
+``` r
+# A tibble: 4 × 3
+
+cc$Time_max
+```
+
+    ## [1] 1 2 3 5
+
+``` r
+cc$n
+```
+
+    ## [1] 53 14  1  1
+
+``` r
+cc$Time_max * cc$n
+```
+
+    ## [1] 53 28  3  5
+
+``` r
+sum(cc$Time_max * cc$n)
+```
+
+    ## [1] 89
+
+``` r
+numdeath <- sum(cc$Time_max * cc$n)
+```
+
+Make sure to include the code to derive the (numeric) fact for the
+statement
+
+### Include your answer
+
+This shows that out of the 53 avengers that died once, 38 of them came
+back which is 71.69% chance they cam back from the dead the first time.
+This is slightly higher then what the article states.
 
 Upload your changes to the repository. Discuss and refine answers as a
 team.
