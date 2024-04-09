@@ -501,3 +501,5 @@ print(hawkeye_deaths3)
 
     ##   av$Name.Alias == "Clinton Francis Barton" & av$Death3 == "YES"   n
     ## 1                                                          FALSE 173
+
+As you can see, hawkeye did indeed die twice.
