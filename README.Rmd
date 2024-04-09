@@ -241,3 +241,22 @@ Make sure to include the code to derive the (numeric) fact for the statement
 This shows that out of the 53 avengers that died once, 38 of them came back which is 71.69% chance they cam back from the dead the first time. This is slightly higher then what the article states.
 
 Upload your changes to the repository. Discuss and refine answers as a team.
+
+## Ashraf
+
+Statement: "In fact, Hawkeye died twice"
+
+```{r}
+hawkeye_deaths1 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death1 == 'YES')
+print(hawkeye_deaths1)
+hawkeye_deaths2 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death2 == 'YES')
+print(hawkeye_deaths2)
+hawkeye_deaths3 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death3 == 'YES')
+print(hawkeye_deaths3)
+```
+
+
+As you can see, hawkeye did indeed die twice

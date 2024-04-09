@@ -46,7 +46,7 @@ library(tidyverse)
 
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ forcats   1.0.0     ✔ readr     2.1.5
-    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.4.4     ✔ stringr   1.5.0
     ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
     ## ✔ purrr     1.0.2
 
@@ -309,7 +309,7 @@ print(numdeath/173)
 Get the data into a format where the five columns for Death\[1-5\] are
 replaced by two columns: Time, and Death. Time should be a number
 between 1 and 5 (look into the function `parse_number`); Death is a
-categorical variables with values “yes”, “no” and ““. Call the resulting
+categorical variables with values “yes”, “no” and "". Call the resulting
 data set `deaths`.
 
 Similarly, deal with the returns of characters.
@@ -468,3 +468,36 @@ This is slightly higher then what the article states.
 
 Upload your changes to the repository. Discuss and refine answers as a
 team.
+
+## Ashraf
+
+Statement: “In fact, Hawkeye died twice”
+
+``` r
+hawkeye_deaths1 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death1 == 'YES')
+print(hawkeye_deaths1)
+```
+
+    ##   av$Name.Alias == "Clinton Francis Barton" & av$Death1 == "YES"   n
+    ## 1                                                          FALSE 172
+    ## 2                                                           TRUE   1
+
+``` r
+hawkeye_deaths2 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death2 == 'YES')
+print(hawkeye_deaths2)
+```
+
+    ##   av$Name.Alias == "Clinton Francis Barton" & av$Death2 == "YES"   n
+    ## 1                                                          FALSE 172
+    ## 2                                                           TRUE   1
+
+``` r
+hawkeye_deaths3 <- av %>%
+  count(av$Name.Alias == 'Clinton Francis Barton' & av$Death3 == 'YES')
+print(hawkeye_deaths3)
+```
+
+    ##   av$Name.Alias == "Clinton Francis Barton" & av$Death3 == "YES"   n
+    ## 1                                                          FALSE 173
